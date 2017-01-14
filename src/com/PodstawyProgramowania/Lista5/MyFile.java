@@ -15,6 +15,7 @@ public class MyFile {
 
     public static void main(String args[]) {
 
+        //Zadanie 1
         MyFile mf = new MyFile();
         double[][] matrix = mf.generateMatrix(5);
         System.out.println("Matrix to Text File:\n" + Arrays.deepToString(matrix));
@@ -23,6 +24,7 @@ public class MyFile {
         System.out.println("Matrix from Text File:");
         MyArrays.print2D(matrixf);
 
+        //Zadanie 2
         double[][] matrix2 = mf.generateMatrix(4);
         System.out.println("Matrix to Binary File:\n" + Arrays.deepToString(matrix2));
         mf.matrixToBinaryFile(matrix2);
