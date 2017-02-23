@@ -32,6 +32,10 @@ public class CiagPomiarow {
         this.pomiary = pomiary;
     }
 
+    public CiagPomiarow(){
+        this.pomiary = new Pomiar[0];
+    }
+
     public Pomiar[] getPomiary() {
         return pomiary;
     }
@@ -50,9 +54,29 @@ public class CiagPomiarow {
         }
     }
 
+    public void zapiszDoPliku(String filename) {
+
+        try (FileOutputStream fos = new FileOutputStream(filename + ".tmp");
+             ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+            oos.writeObject(pomiary);
+        } catch (IOException e) {
+            System.out.println("Nie udało się zapisać pomiarów do pliku: " + e.getMessage());
+        }
+    }
+
     public void wczytajZPliku() {
 
         try (FileInputStream fis = new FileInputStream("CiagPomiarow.tmp");
+             ObjectInputStream ois = new ObjectInputStream(fis)) {
+            pomiary = (Pomiar[]) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Nie udało się wczytać pomiarów z pliku: " + e.getMessage());
+        }
+    }
+
+    public void wczytajZPliku(String filename) {
+
+        try (FileInputStream fis = new FileInputStream(filename + ".tmp");
              ObjectInputStream ois = new ObjectInputStream(fis)) {
             pomiary = (Pomiar[]) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {

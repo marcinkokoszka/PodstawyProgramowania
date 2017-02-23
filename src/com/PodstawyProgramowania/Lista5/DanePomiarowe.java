@@ -26,7 +26,7 @@ public class DanePomiarowe {
 
         System.out.println("\nPomiary z Lutego 2015:");
         dp.wypiszPomiaryMiesiaca(2015, 2);
-        System.out.println("\nomiary w dni Lutego, w których nastąpiło ocieplenie: ");
+        System.out.println("\nPomiary w dni Lutego, w których nastąpiło ocieplenie: ");
         dp.wypiszPomiaryMiesiacaOcieplenie(2015, 2);
     }
 

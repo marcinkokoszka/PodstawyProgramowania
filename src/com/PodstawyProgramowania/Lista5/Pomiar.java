@@ -33,4 +33,5 @@ public class Pomiar implements Serializable {
     public static Pomiar losowyPomiar(Czas czas) {
         return new Pomiar(czas, (int) (Math.random() * 25));
     }
+
 }

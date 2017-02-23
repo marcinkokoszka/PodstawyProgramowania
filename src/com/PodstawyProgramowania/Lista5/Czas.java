@@ -52,4 +52,16 @@ public class Czas implements Serializable {
     public static Czas losowyCzas() {
         return new Czas((int) (Math.random() * 100) + 1916, (int) (Math.random() * 11) + 1, (int) (Math.random() * 28) + 1, (int) (Math.random() * 23), (int) (Math.random() * 59));
     }
+
+    @Override
+    public boolean equals(Object obj){
+        if (obj == null) return false;
+        if (!Czas.class.isAssignableFrom(obj.getClass())) return false;
+        if (this.getRok() != ((Czas) obj).getRok()) return false;
+        if (this.getMiesiac() != ((Czas) obj).getMiesiac()) return false;
+        if (this.getDzien() != ((Czas) obj).getDzien()) return false;
+        if (this.getGodzina() != ((Czas) obj).getGodzina()) return false;
+        if (this.getMinuta() != ((Czas) obj).getMinuta()) return false;
+        return true;
+    }
 }
