@@ -24,7 +24,7 @@ public class CiagPomiarowTest {
     }
 
     @Test
-    public void zapiszDoPlikuIWczytajZPlikuDzialaja() throws Exception {
+    public void zapiszDoPlikuIWczytajZPliku_gdyJedenPomiar() throws Exception {
         cp.zapiszDoPliku("CiagPomiarowTest");
 
         CiagPomiarow cpWczytane = new CiagPomiarow();

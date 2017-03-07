@@ -90,14 +90,19 @@ public class MyFile {
         try (FileReader fr = new FileReader("matrix.txt");
              BufferedReader br = new BufferedReader(fr)){
 
-            ArrayList<String> sLines = new ArrayList<>();
+            br.readLine();
+            double[][] matrix = new double[Integer.parseInt(br.readLine())][Integer.parseInt(br.readLine())];
             String line;
+            String[] tempS;
+            int i = 0;
 
             while ((line = br.readLine()) != null) {
-                sLines.add(line);
+                tempS = line.split(" ");
+                for (int j = 0; j < matrix[i].length; j++) matrix[i][j] = Double.parseDouble(tempS[j]);
+                i++;
             }
 
-            return matrixFromAList(sLines);
+            return matrix;
 
         } catch (IOException e) {
 
@@ -106,17 +111,6 @@ public class MyFile {
         }
 
         return null;
-    }
-
-    private double[][] matrixFromAList(ArrayList<String> sLines) {
-        double[][] t = new double[Integer.parseInt(sLines.get(1))][Integer.parseInt(sLines.get(2))];
-        for (int i = 3; i < sLines.size(); i++) {
-            String[] tempS = sLines.get(i).split(" ");
-            double[] tempD = new double[tempS.length];
-            for (int j = 0; j < tempS.length; j++) tempD[j] = Double.parseDouble(tempS[j]);
-            t[i - 3] = tempD;
-        }
-        return t;
     }
 
     public boolean matrixToBinaryFile(double[][] m) {
