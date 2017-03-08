@@ -18,19 +18,20 @@ public class MyFile {
         //Zadanie 1
         MyFile mf = new MyFile();
         double[][] matrix = mf.generateMatrix(5);
-        System.out.println("Matrix to Text File:\n" + Arrays.deepToString(matrix));
+        System.out.println("Matrix to Text File:");
+        print2D(matrix);
         mf.matrixToTextFile(matrix);
+        System.out.println("\nMatrix from Text File:");
         double[][] matrixf = mf.matrixFromTextFile();
-        System.out.println("Matrix from Text File:");
-        MyArrays.print2D(matrixf);
 
         //Zadanie 2
         double[][] matrix2 = mf.generateMatrix(4);
-        System.out.println("Matrix to Binary File:\n" + Arrays.deepToString(matrix2));
+        System.out.println("\nMatrix to Binary File:");
+        print2D(matrix2);
         mf.matrixToBinaryFile(matrix2);
+        System.out.println("\nMatrix from Binary File:");
         double[][] matrixf2 = mf.matrixFromBinaryFile();
-        System.out.println("Matrix from Binary File:");
-        MyArrays.print2D(matrixf2);
+
     }
 
     public static double round(double value, int places) {
@@ -95,12 +96,25 @@ public class MyFile {
             String line;
             String[] tempS;
             int i = 0;
+            double maxValue = -1;
+            int maxValueI = 0;
+            int maxValueJ = 0;
 
             while ((line = br.readLine()) != null) {
                 tempS = line.split(" ");
-                for (int j = 0; j < matrix[i].length; j++) matrix[i][j] = Double.parseDouble(tempS[j]);
+                for (int j = 0; j < matrix[i].length; j++) {
+                    matrix[i][j] = Double.parseDouble(tempS[j]);
+                    if (matrix[i][j] > maxValue) {
+                        maxValue = matrix[i][j];
+                        maxValueI = i;
+                        maxValueJ = j;
+                    }
+                }
                 i++;
             }
+
+            print2D(matrix);
+            System.out.println("Element o indeksach " + maxValueI + ", " + maxValueJ + " zawiera największą wartość: " + maxValue);
 
             return matrix;
 
@@ -153,13 +167,24 @@ public class MyFile {
              BufferedInputStream bis = new BufferedInputStream(fis);
              DataInputStream dis = new DataInputStream(bis)) {
 
+            double maxValue = -1;
+            int maxValueI = 0;
+            int maxValueJ = 0;
+
             double[][] m = new double[dis.readInt()][dis.readInt()];
 
             for (int i = 0; i < m.length; i++) {
                 for (int j = 0; j < m[i].length; j++) {
                     m[i][j] = dis.readDouble();
+                    if (m[i][j] > maxValue){
+                        maxValue = m[i][j];
+                        maxValueI = i;
+                        maxValueJ = j;
+                    }
                 }
             }
+            print2D(m);
+            System.out.println("Element o indeksach " + maxValueI + ", " + maxValueJ + " zawiera największą wartość: " + maxValue);
 
             return m;
 
@@ -169,5 +194,16 @@ public class MyFile {
 
         }
         return null;
+    }
+
+    public static void print2D(double[][] matrix) {
+        for (int i = 0; i < matrix.length; i++) {
+            System.out.print("| ");
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(String.format("%05.2f", matrix[i][j]) + " ");
+            }
+            System.out.print("|");
+            System.out.println();
+        }
     }
 }

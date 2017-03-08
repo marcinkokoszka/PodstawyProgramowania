@@ -36,11 +36,6 @@ public class Czas implements Serializable {
         return minuta;
     }
 
-//    public boolean pozniejNiz(Czas czas){
-//        if (czas.getRok() > rok) return true;
-//        else if
-//    }
-
     public boolean wczesniejszy(Czas czas) {
         if (rok != czas.getRok()) return rok < czas.getRok();
         else if (miesiac != czas.getMiesiac()) return miesiac < czas.getMiesiac();
